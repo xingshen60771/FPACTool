@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="progressBar_Unpack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 153</value>
+  </data>
+  <data name="progressBar_Unpack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>613, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="progressBar_Unpack.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;progressBar_Unpack.Name" xml:space="preserve">
+    <value>progressBar_Unpack</value>
+  </data>
+  <data name="&gt;&gt;progressBar_Unpack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;progressBar_Unpack.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;progressBar_Unpack.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label_Percentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_Percentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>648, 157</value>
+  </data>
+  <data name="label_Percentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 15</value>
+  </data>
+  <data name="label_Percentage.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="label_Percentage.Text" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label_Percentage.Name" xml:space="preserve">
+    <value>label_Percentage</value>
+  </data>
+  <data name="&gt;&gt;label_Percentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_Percentage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label_Percentage.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="label_State.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_State.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 126</value>
+  </data>
+  <data name="label_State.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 15</value>
+  </data>
+  <data name="label_State.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="label_State.Text" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label_State.Name" xml:space="preserve">
+    <value>label_State</value>
+  </data>
+  <data name="&gt;&gt;label_State.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_State.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label_State.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="btn_Cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>416, 696</value>
+  </data>
+  <data name="btn_Cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btn_Cancel.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="btn_Cancel.Text" xml:space="preserve">
+    <value>关闭(&amp;X)</value>
+  </data>
+  <data name="&gt;&gt;btn_Cancel.Name" xml:space="preserve">
+    <value>btn_Cancel</value>
+  </data>
+  <data name="&gt;&gt;btn_Cancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_Cancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_Cancel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="btn_Unpack.Location" type="System.Drawing.Point, System.Drawing">
+    <value>668, 696</value>
+  </data>
+  <data name="btn_Unpack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btn_Unpack.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="btn_Unpack.Text" xml:space="preserve">
+    <value>全部提取(&amp;U)</value>
+  </data>
+  <data name="&gt;&gt;btn_Unpack.Name" xml:space="preserve">
+    <value>btn_Unpack</value>
+  </data>
+  <data name="&gt;&gt;btn_Unpack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_Unpack.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_Unpack.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="listBox_OutputLog.ItemHeight" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="listBox_OutputLog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 481</value>
+  </data>
+  <data name="listBox_OutputLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>751, 199</value>
+  </data>
+  <data name="listBox_OutputLog.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;listBox_OutputLog.Name" xml:space="preserve">
+    <value>listBox_OutputLog</value>
+  </data>
+  <data name="&gt;&gt;listBox_OutputLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listBox_OutputLog.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;listBox_OutputLog.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="btn_PACFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>651, 38</value>
+  </data>
+  <data name="btn_PACFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btn_PACFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="btn_PACFilePath.Text" xml:space="preserve">
+    <value>打开PAC(&amp;O)…</value>
+  </data>
+  <data name="&gt;&gt;btn_PACFilePath.Name" xml:space="preserve">
+    <value>btn_PACFilePath</value>
+  </data>
+  <data name="&gt;&gt;btn_PACFilePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_PACFilePath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_PACFilePath.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="btn_UnpackDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>651, 74</value>
+  </data>
+  <data name="btn_UnpackDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btn_UnpackDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="btn_UnpackDirectory.Text" xml:space="preserve">
+    <value>浏览(&amp;B)…</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackDirectory.Name" xml:space="preserve">
+    <value>btn_UnpackDirectory</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackDirectory.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="textBox_UnpackDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 79</value>
+  </data>
+  <data name="textBox_UnpackDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>540, 25</value>
+  </data>
+  <data name="textBox_UnpackDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;textBox_UnpackDirectory.Name" xml:space="preserve">
+    <value>textBox_UnpackDirectory</value>
+  </data>
+  <data name="&gt;&gt;textBox_UnpackDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_UnpackDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox_UnpackDirectory.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="textBox_PACFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 41</value>
+  </data>
+  <data name="textBox_PACFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>540, 25</value>
+  </data>
+  <data name="textBox_PACFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;textBox_PACFilePath.Name" xml:space="preserve">
+    <value>textBox_PACFilePath</value>
+  </data>
+  <data name="&gt;&gt;textBox_PACFilePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox_PACFilePath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox_PACFilePath.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="label_UnpackDirectory.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_UnpackDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 84</value>
+  </data>
+  <data name="label_UnpackDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 15</value>
+  </data>
+  <data name="label_UnpackDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="label_UnpackDirectory.Text" xml:space="preserve">
+    <value>提取路径</value>
+  </data>
+  <data name="&gt;&gt;label_UnpackDirectory.Name" xml:space="preserve">
+    <value>label_UnpackDirectory</value>
+  </data>
+  <data name="&gt;&gt;label_UnpackDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_UnpackDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label_UnpackDirectory.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="label_PACFilePath.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_PACFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 46</value>
+  </data>
+  <data name="label_PACFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="label_PACFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label_PACFilePath.Text" xml:space="preserve">
+    <value>PAC文件</value>
+  </data>
+  <data name="&gt;&gt;label_PACFilePath.Name" xml:space="preserve">
+    <value>label_PACFilePath</value>
+  </data>
+  <data name="&gt;&gt;label_PACFilePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_PACFilePath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label_PACFilePath.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="columnHeader_Num.Text" xml:space="preserve">
+    <value>序号</value>
+  </data>
+  <data name="columnHeader1_FileName.Text" xml:space="preserve">
+    <value>文件名称</value>
+  </data>
+  <data name="columnHeader1_FileName.Width" type="System.Int32, mscorlib">
+    <value>280</value>
+  </data>
+  <data name="columnHeader_FileOffset.Text" xml:space="preserve">
+    <value>文件偏移</value>
+  </data>
+  <data name="columnHeader_FileOffset.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="columnHeader_FileSize.Text" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="columnHeader_FileSize.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="columnHeader_Signature.Text" xml:space="preserve">
+    <value>签名值</value>
+  </data>
+  <data name="columnHeader_Signature.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="listView_FileList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 201</value>
+  </data>
+  <data name="listView_FileList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>751, 258</value>
+  </data>
+  <data name="listView_FileList.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;listView_FileList.Name" xml:space="preserve">
+    <value>listView_FileList</value>
+  </data>
+  <data name="&gt;&gt;listView_FileList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listView_FileList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;listView_FileList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btn_UnpackSingle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>542, 696</value>
+  </data>
+  <data name="btn_UnpackSingle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 30</value>
+  </data>
+  <data name="btn_UnpackSingle.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="btn_UnpackSingle.Text" xml:space="preserve">
+    <value>提取选中(&amp;S)</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackSingle.Name" xml:space="preserve">
+    <value>btn_UnpackSingle</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackSingle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackSingle.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btn_UnpackSingle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="MenuItem_CopyOutputLog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 24</value>
+  </data>
+  <data name="MenuItem_CopyOutputLog.Text" xml:space="preserve">
+    <value>复制细节至剪切板(&amp;C)</value>
+  </data>
+  <data name="contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 28</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Name" xml:space="preserve">
+    <value>contextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>8, 15</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 738</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Form_Unpack</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_Num.Name" xml:space="preserve">
+    <value>columnHeader_Num</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_Num.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1_FileName.Name" xml:space="preserve">
+    <value>columnHeader1_FileName</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1_FileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_FileOffset.Name" xml:space="preserve">
+    <value>columnHeader_FileOffset</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_FileOffset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_FileSize.Name" xml:space="preserve">
+    <value>columnHeader_FileSize</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_FileSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_Signature.Name" xml:space="preserve">
+    <value>columnHeader_Signature</value>
+  </data>
+  <data name="&gt;&gt;columnHeader_Signature.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MenuItem_CopyOutputLog.Name" xml:space="preserve">
+    <value>MenuItem_CopyOutputLog</value>
+  </data>
+  <data name="&gt;&gt;MenuItem_CopyOutputLog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form_Unpack</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
