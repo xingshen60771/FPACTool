@@ -7,7 +7,7 @@
 (需要安装.NET Framework 4.5运行库)
 
 ## 基本信息
-源码名称：PCK Viewer  
+源码名称：FPAC Tool   
 源码版本：1.0.0  
 源码作者：52pojie.cn  
 源码语言：C#  
@@ -28,3 +28,4 @@
 ## 致谢
 - [coinkillerl](https://github.com/coinkillerl/FPACker/edit/master/README.md)   —— 参照了关于打包方法的文字描述。
 
+如需EXE成品，请到右侧release中下载。
