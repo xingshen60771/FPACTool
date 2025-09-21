@@ -17,7 +17,7 @@
 1、源码发布  
 
 ## 截图预览  
-![使用效果]([https://github.com/xingshen60771/FPACTool/Screenshot/Screenshot.png](https://github.com/xingshen60771/FPACTool/blob/master/Screenshot/Screenshot.png))  
+![使用效果](https://github.com/xingshen60771/FPACTool/blob/master/Screenshot/Screenshot.png)  
 
 ## 如何编译  
 本软件使用了Tuple多元List，因此依赖于.NET Framework V4.5运行，原则上Visual Studio 2015就可以编译，但是本人是在Visual Studio 2022中编译的，因此建议在Visual Studio 2022中编译。  
