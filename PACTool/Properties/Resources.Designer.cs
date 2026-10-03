@@ -59,5 +59,199 @@ namespace FPACTool.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon APP {
+            get {
+                object obj = ResourceManager.GetObject("APP", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_52pojielogo {
+            get {
+                object obj = ResourceManager.GetObject("img_52pojielogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_DDSView_SaveAs {
+            get {
+                object obj = ResourceManager.GetObject("img_DDSView_SaveAs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_DDSView_ZoomIn {
+            get {
+                object obj = ResourceManager.GetObject("img_DDSView_ZoomIn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_DDSView_ZoomOut {
+            get {
+                object obj = ResourceManager.GetObject("img_DDSView_ZoomOut", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_About {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Add {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Close {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Delete {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Help {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_New {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_New", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Open {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_Pack {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_Pack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_PACProperties {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_PACProperties", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_UnpackAll {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_UnpackAll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap img_ToolStrip_UnpackSelect {
+            get {
+                object obj = ResourceManager.GetObject("img_ToolStrip_UnpackSelect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] license {
+            get {
+                object obj = ResourceManager.GetObject("license", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 2026.09.18——V2.1
+        ///-----------------------------------
+        ///1、【细节优化】
+        ///      1) 移除了打开 PAC 文件时又取消打开所弹出的未选择文件提示框，此为开发期间为调试程序所遗留，故做移除处理。
+        ///      2) 生成 PAC 的时候，由先前的先检查后写入改为边检查边写入，提升处理效率。
+        ///      3) 打包/提取完成后将询问是否打开输出目录，省去还要到文件浏览器一通乱翻的麻烦。 
+        ///2、【文案调整】调整了部分文案、修正错别字。 
+        ///
+        ///2026.09.18——V2.0
+        ///-----------------------------------
+        ///1、【全新界面】工具界面全面更新！现在可以像使用压缩文件管理器一样浏览、打包和提取文件。
+        ///2、【新增功能】新增 DDS 图像浏览功能。打开 PAC 文件并找到 DDS 文件后，双击即可预览，同时支持保存为 JPG、PNG 等常规图片格式。
+        ///3、【Bug 修复】修复因打包生成的 PAC 文件路径哈希值错误而导致游戏闪退的问题。
+        ///
+        ///2025.09.22——V1.0
+        ///---------------- [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string text_changelog {
+            get {
+                return ResourceManager.GetString("text_changelog", resourceCulture);
+            }
+        }
     }
 }

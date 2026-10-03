@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,80 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="APP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\APP.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_52pojielogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_52pojielogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_DDSView_SaveAs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_DDSView_SaveAs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_DDSView_ZoomIn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_DDSView_ZoomIn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_DDSView_ZoomOut" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_DDSView_ZoomOut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_About" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_About.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_New" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_Pack" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_Pack.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_PACProperties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_PACProperties.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_UnpackAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_UnpackAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="img_ToolStrip_UnpackSelect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\img_ToolStrip_UnpackSelect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="license" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\license.rtf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="text_changelog" xml:space="preserve">
+    <value>2026.09.18——V2.1
+-----------------------------------
+1、【细节优化】
+      1) 移除了打开 PAC 文件时又取消打开所弹出的未选择文件提示框，此为开发期间为调试程序所遗留，故做移除处理。
+      2) 生成 PAC 的时候，由先前的先检查后写入改为边检查边写入，提升处理效率。
+      3) 打包/提取完成后将询问是否打开输出目录，省去还要到文件浏览器一通乱翻的麻烦。 
+2、【文案调整】调整了部分文案、修正错别字。 
+
+2026.09.18——V2.0
+-----------------------------------
+1、【全新界面】工具界面全面更新！现在可以像使用压缩文件管理器一样浏览、打包和提取文件。
+2、【新增功能】新增 DDS 图像浏览功能。打开 PAC 文件并找到 DDS 文件后，双击即可预览，同时支持保存为 JPG、PNG 等常规图片格式。
+3、【Bug 修复】修复因打包生成的 PAC 文件路径哈希值错误而导致游戏闪退的问题。
+
+2025.09.22——V1.0
+-----------------------------------
+1、【软件发布】软件正式版发布。</value>
+  </data>
 </root>

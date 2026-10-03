@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# KuroTools 相关工具目录（不参与仓库上传）
+KuroTools v1.3/
+

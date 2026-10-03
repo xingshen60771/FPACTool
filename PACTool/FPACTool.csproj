@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B06F3C85-80E6-469C-B88A-6DE8ACA74F07}</ProjectGuid>
+    <ProjectGuid>{FD546A92-1DDD-4EBD-9FEB-E0BC8AAFDB17}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>FPACTool</RootNamespace>
     <AssemblyName>FPACTool</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>APP.ico</ApplicationIcon>
@@ -51,36 +51,76 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form_Pack.cs">
+    <Compile Include="DDSHelper.cs" />
+    <Compile Include="LZ4Helper.cs" />
+    <Compile Include="Form_DDSProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Pack.Designer.cs">
-      <DependentUpon>Form_Pack.cs</DependentUpon>
+    <Compile Include="Form_DDSProperties.Designer.cs">
+      <DependentUpon>Form_DDSProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_Unpack.cs">
+    <Compile Include="Form_DDSView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_Unpack.Designer.cs">
-      <DependentUpon>Form_Unpack.cs</DependentUpon>
+    <Compile Include="Form_DDSView.Designer.cs">
+      <DependentUpon>Form_DDSView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Help.Designer.cs">
+      <DependentUpon>Form_Help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FPACHelper.cs" />
+    <Compile Include="Form_About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_About.Designer.cs">
+      <DependentUpon>Form_About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_ChangeLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_ChangeLog.Designer.cs">
+      <DependentUpon>Form_ChangeLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_License.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_License.Designer.cs">
+      <DependentUpon>Form_License.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelpText.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="FPACHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicFunction.cs" />
-    <EmbeddedResource Include="Form_Pack.resx">
-      <DependentUpon>Form_Pack.cs</DependentUpon>
+    <Compile Include="ToolStripIconShow.cs" />
+    <EmbeddedResource Include="Form_DDSProperties.resx">
+      <DependentUpon>Form_DDSProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_Unpack.resx">
-      <DependentUpon>Form_Unpack.cs</DependentUpon>
+    <EmbeddedResource Include="Form_DDSView.resx">
+      <DependentUpon>Form_DDSView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Help.resx">
+      <DependentUpon>Form_Help.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_About.resx">
+      <DependentUpon>Form_About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_ChangeLog.resx">
+      <DependentUpon>Form_ChangeLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_License.resx">
+      <DependentUpon>Form_License.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +141,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

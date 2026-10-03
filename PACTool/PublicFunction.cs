@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FPACTool
 {
@@ -12,6 +10,7 @@ namespace FPACTool
     /// </summary>
     internal class PublicFunction
     {
+        #region 公共辅助方法
         ///<summary>
         /// &lt;文本型&gt; 取软件基本信息 
         /// <param name="paramcode">(整数型 要获取的信息代码)<para>参数代码含义:</para>1：取软件名称；2:取软件版本；3:取软件开发者；4、取软件产品名称。<para></para></param>
@@ -83,6 +82,72 @@ namespace FPACTool
             return (size / Math.Pow(num, 10)).ToString("f2") + "NB";
         }
 
+        /// <summary>
+        /// 将小端存储的字节数组转换为高位在前显示的十六进制字符串。
+        /// </summary>
+        /// <param name="bytes">小端存储的字节数组</param>
+        /// <returns>高位在前的十六进制字符串</returns>
+        public static string LittleEndianToHexString(byte[] bytes)
+        {
+            // 参数验证
+            if (bytes == null)
+                throw new ArgumentNullException(nameof(bytes));
+            if (bytes.Length == 0)
+                return string.Empty;
 
+            // 创建字节数组的副本以避免修改原始数组
+            byte[] reversedBytes = (byte[])bytes.Clone();
+
+            // 反转字节顺序：小端 -> 大端表示
+            Array.Reverse(reversedBytes);
+
+            // 将每个字节转换为两位十六进制格式并拼接
+            StringBuilder hexString = new StringBuilder();
+            foreach (byte b in reversedBytes)
+            {
+                hexString.Append(b.ToString("X2"));
+            }
+
+            return hexString.ToString();
+        }
+
+        public static string GetCurrentTime()
+        {
+            return DateTime.Now.ToString("[yyyy-MM-dd HH:mm:ss:fff]  ");
+        }
+        #endregion
+
+        /// <summary>
+        /// 生成随机文件夹名称
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string GenerateFolderName(string input)
+        {
+            // 获取当前时间精确到毫秒，格式：yyyyMMddHHmmssfff
+            string timeStr = DateTime.Now.ToString("yyyyMMddHHmmssfff");
+
+            // 拼接输入字符和时间
+            string combined = input + timeStr;
+
+            // 计算 MD5 哈希（使用 .NET 内置类，无需外部库）
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(combined));
+
+                // 将哈希字节转换为十六进制字符串
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in hashBytes)
+                {
+                    sb.Append(b.ToString("x2")); // 使用小写十六进制，也可改为 "X2" 大写
+                }
+
+                // 取前8位作为八位字符文本
+                string eightChars = sb.ToString().Substring(0, 8);
+
+                // 返回最终结果
+                return "FPACTOOL$Ext" + eightChars.ToUpper();
+            }
+        }
     }
 }

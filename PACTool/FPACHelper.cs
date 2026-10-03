@@ -73,6 +73,7 @@ namespace FPACTool
         {
             public int percentage { get; set; }     //打包解包进程百分比
             public string state { get; set; }       //打包解包状态
+            public string error { get; set; }       //非空表示本文件提取失败的原因（异步时单文件失败不影响整体继续）
         }
         #endregion
 
@@ -172,7 +173,7 @@ namespace FPACTool
         /// <summary>
         /// 自然字符串比较
         /// </summary>
-        private static class NaturalStringComparer
+        internal static class NaturalStringComparer
         {
             /// <summary>
             /// &lt;整数型&gt; 比较自然字符串
@@ -224,6 +225,24 @@ namespace FPACTool
         public class Pack
         {
             /// <summary>
+            /// &lt;文本型&gt;获取带目录名前缀的 PAC 内部文件名
+            /// <param name="packPath">(文本型 被打包的目录绝对路径, </param>
+            /// <param name="file">文本型 目录下的某个文件绝对路径)</param>
+            /// <para>对齐 FPACker 与游戏格式：目录名/相对路径</para>
+            /// <para>游戏 pac 里的文件名形如 "table_sc/t_shop.tbl"，CRC32 是对这个完整字符串计算的，
+            /// 若丢失目录名前缀会导致 hash 全部算错、游戏无法定位文件而闪退。</para>
+            /// <returns>返回带目录名前缀的 PAC 内部文件名</returns>
+            /// </summary>
+            private static string GetPacRelativePath(string packPath, string file)
+            {
+                string rel = GetRelativePath(packPath, file);
+                string dirName = Path.GetFileName(packPath.TrimEnd('\\', '/'));
+                if (string.IsNullOrEmpty(dirName))
+                    return rel.Replace('\\', '/');
+                return (dirName + "/" + rel).Replace('\\', '/');
+            }
+
+            /// <summary>
             /// 打包PAC
             /// <param name="packPath">(文本型 欲打包的文件夹绝对路径, </param>
             /// <param name="filePath">文本型 欲保存的PAC文件路径)</param>
@@ -234,8 +253,8 @@ namespace FPACTool
                 if (!Directory.Exists(packPath))
                     throw new DirectoryNotFoundException($"目标目录不存在: {packPath}");
 
-                // 使用系统默认编码
-                Encoding encoding = Encoding.Default;
+                // 使用 UTF-8 编码（与解包端一致，避免中文文件名乱码；对纯 ASCII 与游戏完全兼容）
+                Encoding encoding = Encoding.UTF8;
 
                 // 收集文件信息
                 var files = new List<FpacFile>();
@@ -243,7 +262,7 @@ namespace FPACTool
 
                 foreach (string file in fileList)
                 {
-                    var relativePath = GetRelativePath(packPath, file).Replace('\\', '/');
+                    var relativePath = GetPacRelativePath(packPath, file);
                     var fileInfo = new FileInfo(file);
 
                     // 计算CRC32使用默认编码的字节数组
@@ -264,8 +283,14 @@ namespace FPACTool
                     files.Add(fpacFile);
                 }
 
-                // 按文件名自然排序计算地址
-                files.Sort((a, b) => NaturalStringComparer.Compare(a.RelativePath, b.RelativePath));
+                // 按文件名自然排序计算地址;自然比较相等时用完整路径稳定排序。
+                files.Sort(delegate (FpacFile left, FpacFile right)
+                {
+                    int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                    return result != 0
+                        ? result
+                        : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                });
 
                 ulong filepathBlockSize = 0;
                 ulong entryBlockSize = (ulong)(ENTRY_SIZE * files.Count);
@@ -307,7 +332,13 @@ namespace FPACTool
                     }
 
                     // 按文件名排序写入文件路径（使用默认编码）
-                    files.Sort((a, b) => NaturalStringComparer.Compare(a.RelativePath, b.RelativePath));
+                    files.Sort(delegate (FpacFile left, FpacFile right)
+                    {
+                        int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                        return result != 0
+                            ? result
+                            : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                    });
                     foreach (var file in files)
                     {
                         var nameBytes = encoding.GetBytes(file.RelativePath);
@@ -338,8 +369,8 @@ namespace FPACTool
                     if (!Directory.Exists(packPath))
                         throw new DirectoryNotFoundException($"目标目录不存在: {packPath}");
 
-                    // 使用系统默认编码
-                    Encoding encoding = Encoding.Default;
+                    // 使用 UTF-8 编码（与解包端一致，避免中文文件名乱码；对纯 ASCII 与游戏完全兼容）
+                    Encoding encoding = Encoding.UTF8;
 
                     progressCallback?.Invoke(new FileProgress { percentage = 0, state = "开始收集文件信息..." });
 
@@ -350,7 +381,7 @@ namespace FPACTool
                     for (int i = 0; i < fileList.Count; i++)
                     {
                         string file = fileList[i];
-                        var relativePath = GetRelativePath(packPath, file).Replace('\\', '/');
+                        var relativePath = GetPacRelativePath(packPath, file);
                         var fileInfo = new FileInfo(file);
 
                         // 计算CRC32使用默认编码的字节数组
@@ -380,8 +411,14 @@ namespace FPACTool
 
                     progressCallback?.Invoke(new FileProgress { percentage = 25, state = "计算文件地址..." });
 
-                    // 按文件名自然排序计算地址
-                    files.Sort((a, b) => NaturalStringComparer.Compare(a.RelativePath, b.RelativePath));
+                    // 按文件名自然排序计算地址;自然比较相等时用完整路径稳定排序。
+                    files.Sort(delegate (FpacFile left, FpacFile right)
+                    {
+                        int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                        return result != 0
+                            ? result
+                            : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                    });
 
                     ulong filepathBlockSize = 0;
                     ulong entryBlockSize = (ulong)(ENTRY_SIZE * files.Count);
@@ -429,7 +466,13 @@ namespace FPACTool
                         progressCallback?.Invoke(new FileProgress { percentage = 45, state = "写入文件路径..." });
 
                         // 按文件名排序写入文件路径（使用默认编码）
-                        files.Sort((a, b) => NaturalStringComparer.Compare(a.RelativePath, b.RelativePath));
+                        files.Sort(delegate (FpacFile left, FpacFile right)
+                        {
+                            int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                            return result != 0
+                                ? result
+                                : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                        });
                         foreach (var file in files)
                         {
                             var nameBytes = encoding.GetBytes(file.RelativePath);
@@ -458,7 +501,249 @@ namespace FPACTool
             }
 
             /// <summary>
-            /// &lt;列表&lt;文本型&gt;&gt;递归获取目录下所有文件
+            /// 按待打包列表异步生成 PAC
+            /// <param name="packList">(ListTuple 映射列表, </param>
+            /// <param name="filePath">文本型 要生成的 PAC 文件路径)</param>
+            /// <param name="progressCallback">进度回调</param>
+            /// <para>列表项 Item1 为源文件完整路径，Item2 为 PAC 内部完整相对路径。
+            /// 源文件位置与 PAC 内部目录彼此独立，因此同一个磁盘目录中的文件可映射到任意 PAC 子目录。</para>
+            /// </summary>
+            public static async Task PackPACAsync(
+                List<Tuple<string, string>> packList,
+                string filePath,
+                Action<FileProgress> progressCallback)
+            {
+                await Task.Run(() => PackPACFromList(packList, filePath, progressCallback));
+            }
+
+            /// <summary>
+            /// 将多个源文件映射写入一个 PAC 文件。
+            /// </summary>
+            private static void PackPACFromList(
+                List<Tuple<string, string>> packList,
+                string filePath,
+                Action<FileProgress> progressCallback)
+            {
+                if (packList == null || packList.Count == 0)
+                    throw new InvalidDataException("待打包列表为空，无法生成 PAC 文件。");
+                if (string.IsNullOrWhiteSpace(filePath))
+                    throw new ArgumentException("PAC 文件保存路径不能为空。", nameof(filePath));
+
+                string outputPath = Path.GetFullPath(filePath);
+                string outputDirectory = Path.GetDirectoryName(outputPath);
+                if (!string.IsNullOrEmpty(outputDirectory) && !Directory.Exists(outputDirectory))
+                    Directory.CreateDirectory(outputDirectory);
+
+                Encoding encoding = Encoding.UTF8;
+                var files = new List<FpacFile>();
+                var internalPathSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                progressCallback?.Invoke(new FileProgress
+                {
+                    percentage = 0,
+                    state = "开始检查待打包文件..."
+                });
+
+                for (int i = 0; i < packList.Count; i++)
+                {
+                    Tuple<string, string> mapping = packList[i];
+                    if (mapping == null)
+                        throw new InvalidDataException("待打包列表包含空项目。");
+
+                    string sourceFile = Path.GetFullPath(mapping.Item1 ?? string.Empty);
+                    string relativePath = NormalizePacRelativePath(mapping.Item2);
+
+                    if (string.Equals(sourceFile, outputPath, StringComparison.OrdinalIgnoreCase))
+                        throw new InvalidDataException("PAC 输出文件不能同时作为待打包源文件。");
+                    if (!internalPathSet.Add(relativePath))
+                        throw new InvalidDataException($"PAC 内部路径重复: {relativePath}");
+
+                    // 文件不存在、拒绝访问等情况：只记录并跳过该文件，不中断整体打包。
+                    byte[] fileContents;
+                    try
+                    {
+                        fileContents = File.ReadAllBytes(sourceFile);
+                    }
+                    catch (Exception ex) when (ex is FileNotFoundException ||
+                                               ex is DirectoryNotFoundException ||
+                                               ex is UnauthorizedAccessException ||
+                                               ex is IOException)
+                    {
+                        progressCallback?.Invoke(new FileProgress
+                        {
+                            percentage = (i + 1) * 20 / packList.Count,
+                            state = $"跳过文件: {relativePath}",
+                            error = $"文件「{relativePath}」无法访问，已跳过：{ex.Message}"
+                        });
+                        continue;
+                    }
+
+                    byte[] relativePathBytes = encoding.GetBytes(relativePath);
+                    uint crc32 = CRC32.Calculate(relativePathBytes) ^ 0xFFFFFFFF;
+
+                    files.Add(new FpacFile
+                    {
+                        Filename = sourceFile,
+                        RelativePath = relativePath,
+                        FileContents = fileContents,
+                        FileInfo = new FpacFileInfo
+                        {
+                            FileSize = (ulong)fileContents.LongLength,
+                            FilenameCrc32 = crc32,
+                            Unknown = 0
+                        }
+                    });
+
+                    progressCallback?.Invoke(new FileProgress
+                    {
+                        percentage = (i + 1) * 20 / packList.Count,
+                        state = $"检查文件: {i + 1}/{packList.Count}"
+                    });
+                }
+
+                // 所有文件均无法访问时，不生成空 PAC，直接报错。
+                if (files.Count == 0)
+                    throw new InvalidDataException("所有待打包文件均无法访问，已全部跳过。");
+
+                files.Sort(delegate (FpacFile left, FpacFile right)
+                {
+                    int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                    return result != 0
+                        ? result
+                        : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                });
+
+                ulong entryBlockSize = checked((ulong)ENTRY_SIZE * (ulong)files.Count);
+                ulong filepathBlockSize = 0;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    files[i].FileInfo.FilenameOffset = checked(
+                        (ulong)HEADER_SIZE + entryBlockSize + filepathBlockSize);
+                    filepathBlockSize = checked(
+                        filepathBlockSize + (ulong)encoding.GetByteCount(files[i].RelativePath) + 1UL);
+                }
+
+                ulong firstFileOffset = checked((ulong)HEADER_SIZE + entryBlockSize + filepathBlockSize);
+                if (firstFileOffset > uint.MaxValue)
+                    throw new InvalidDataException("PAC 目录区超过格式支持的大小。");
+
+                ulong dataBlockSize = 0;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    files[i].FileInfo.FileOffset = checked(firstFileOffset + dataBlockSize);
+                    dataBlockSize = checked(dataBlockSize + files[i].FileInfo.FileSize);
+                }
+
+                progressCallback?.Invoke(new FileProgress
+                {
+                    percentage = 25,
+                    state = "目录信息检查完成，开始写入 PAC 文件..."
+                });
+
+                using (var writer = new BinaryWriter(new FileStream(
+                    outputPath,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.None)))
+                {
+                    var header = new FpacHeader
+                    {
+                        Magic = FPAC_MAGIC,
+                        FileCount = (uint)files.Count,
+                        FirstFileOffset = (uint)firstFileOffset,
+                        Unknown = 1
+                    };
+                    WriteHeader(writer, header);
+
+                    files.Sort(delegate (FpacFile left, FpacFile right)
+                    {
+                        int result = left.FileInfo.FilenameCrc32.CompareTo(right.FileInfo.FilenameCrc32);
+                        return result != 0
+                            ? result
+                            : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                    });
+                    foreach (FpacFile file in files)
+                        WriteFileInfo(writer, file.FileInfo);
+
+                    progressCallback?.Invoke(new FileProgress
+                    {
+                        percentage = 40,
+                        state = "正在写入文件路径..."
+                    });
+
+                    files.Sort(delegate (FpacFile left, FpacFile right)
+                    {
+                        int result = NaturalStringComparer.Compare(left.RelativePath, right.RelativePath);
+                        return result != 0
+                            ? result
+                            : string.Compare(left.RelativePath, right.RelativePath, StringComparison.OrdinalIgnoreCase);
+                    });
+                    foreach (FpacFile file in files)
+                    {
+                        writer.Write(encoding.GetBytes(file.RelativePath));
+                        writer.Write((byte)0);
+                    }
+
+                    progressCallback?.Invoke(new FileProgress
+                    {
+                        percentage = 50,
+                        state = "正在写入文件数据..."
+                    });
+
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        // 数据已在收集阶段读入内存，直接写入，避免写入期 IO 失败中断整体打包。
+                        writer.Write(files[i].FileContents);
+
+                        progressCallback?.Invoke(new FileProgress
+                        {
+                            percentage = 50 + (i + 1) * 50 / files.Count,
+                            state = $"正在写入: {files[i].RelativePath}"
+                        });
+                    }
+                }
+
+                progressCallback?.Invoke(new FileProgress
+                {
+                    percentage = 100,
+                    state = "PAC 打包完成!"
+                });
+            }
+
+
+            /// <summary>
+            /// 规范化并校验 PAC 内部相对路径
+            /// <param name="path">(文本型 欲处理的路径)</param>
+            /// <returns><para>返回规范的 PAC 内部相对路径</para></returns>
+            /// </summary>
+            private static string NormalizePacRelativePath(string path)
+            {
+                if (string.IsNullOrWhiteSpace(path) || path.IndexOf('\0') >= 0)
+                    throw new InvalidDataException("PAC 内部路径不能为空或包含无效字符。");
+
+                string normalized = path.Replace('\\', '/');
+                if (normalized.StartsWith("/", StringComparison.Ordinal) ||
+                    Path.IsPathRooted(normalized.Replace('/', Path.DirectorySeparatorChar)))
+                {
+                    throw new InvalidDataException($"PAC 内部路径无效: {path}");
+                }
+
+                normalized = normalized.Trim('/');
+                if (normalized.Length == 0)
+                    throw new InvalidDataException($"PAC 内部路径无效: {path}");
+
+                string[] segments = normalized.Split('/');
+                for (int i = 0; i < segments.Length; i++)
+                {
+                    if (segments[i].Length == 0 || segments[i] == "." || segments[i] == ".." || segments[i].IndexOf(':') >= 0)
+                        throw new InvalidDataException($"PAC 内部路径无效: {path}");
+                }
+
+                return string.Join("/", segments);
+            }
+
+            /// <summary>
+            /// &lt;List&lt;string&gt;&gt;递归获取目录下所有文件
             /// <param name="directoryPath">(文本型 目录路径)</param>
             /// <returns><para>返回文件列表</para></returns>
             /// </summary>
@@ -495,9 +780,9 @@ namespace FPACTool
 
             /// <summary>
             /// 写入文件头
-            /// </summary>
             /// <param name="writer"></param>
             /// <param name="header"></param>
+            /// </summary>
             private static void WriteHeader(BinaryWriter writer, FpacHeader header)
             {
                 writer.Write(header.Magic);
@@ -508,9 +793,9 @@ namespace FPACTool
 
             /// <summary>
             /// 写入文件条目
-            /// </summary>
             /// <param name="writer"></param>
             /// <param name="fileInfo"></param>
+            /// </summary>
             private static void WriteFileInfo(BinaryWriter writer, FpacFileInfo fileInfo)
             {
                 writer.Write(fileInfo.FilenameCrc32);
@@ -529,7 +814,7 @@ namespace FPACTool
         public class UnPack
         {
             /// <summary>
-            /// &lt;列表&lt;四元组&gt;&gt;取PAC内部文件列表
+            /// &lt;List&lt;Tuple&gt;&gt;取PAC内部文件列表
             /// <param name="PACfilePath">(文本型 欲获取内部文件列表的PAC文件)</param>
             /// <returns><para>成功返回PAC文件的文件名签名字节集、文件名文本、文件偏移、实际大小</para></returns>
             /// </summary>
@@ -542,60 +827,106 @@ namespace FPACTool
                 if (!File.Exists(PACfilePath))
                     throw new FileNotFoundException($"PAC文件不存在: {PACfilePath}");
 
-                // 读取PAC文件
-                using (var reader = new BinaryReader(File.OpenRead(PACfilePath)))
+                try
                 {
-                    // 验证魔数
-                    uint magic = reader.ReadUInt32();
-                    if (magic != FPAC_MAGIC)
-                        throw new InvalidDataException($"无效的PAC文件格式或者已经被加密了。");
-
-                    // 读取文件头
-                    uint fileCount = reader.ReadUInt32();
-                    uint FirstFileOffset = reader.ReadUInt32();
-                    uint unknown = reader.ReadUInt32();
-
-                    // 读取文件条目
-                    var fileInfos = new List<FpacFileInfo>();
-                    for (int i = 0; i < fileCount; i++)
+                    // 读取PAC文件
+                    using (var reader = new BinaryReader(File.OpenRead(PACfilePath)))
                     {
-                        var fileInfo = new FpacFileInfo
-                        {
-                            FilenameCrc32 = reader.ReadUInt32(),
-                            Unknown = reader.ReadUInt32(),
-                            FilenameOffset = reader.ReadUInt64(),
-                            FileSize = reader.ReadUInt64(),
-                            FileOffset = reader.ReadUInt64()
-                        };
-                        fileInfos.Add(fileInfo);
-                    }
+                        long fileLen = reader.BaseStream.Length;
 
-                    // 读取文件名并构建结果
-                    foreach (var fileInfo in fileInfos)
-                    {
-                        // 定位到文件名位置
-                        reader.BaseStream.Seek((long)fileInfo.FilenameOffset, SeekOrigin.Begin);
+                        // 文件连文件头(16字节)都读不全 -> 不可能是有效 PAC
+                        if (fileLen < HEADER_SIZE)
+                            throw new InvalidDataException("未知的格式，读取失败！");
 
-                        // 读取null结尾的文件名
-                        var nameBytes = new List<byte>();
-                        byte b;
-                        while ((b = reader.ReadByte()) != 0)
+                        // 验证魔数
+                        uint magic = reader.ReadUInt32();
+                        if (magic != FPAC_MAGIC)
+                            throw new InvalidDataException("未知的格式，读取失败！");
+
+                        // 读取文件头
+                        uint fileCount = reader.ReadUInt32();
+                        uint firstFileOffset = reader.ReadUInt32();
+                        uint unknown = reader.ReadUInt32();
+
+                        // 防御性校验：条目数必须为正数且整体落在文件范围内，否则视为文件表损坏
+                        if (fileCount == 0 || fileCount > int.MaxValue / ENTRY_SIZE)
+                            throw new InvalidDataException("文件表损坏，读取失败！");
+
+                        long entryTableEnd = (long)HEADER_SIZE + (long)fileCount * ENTRY_SIZE;
+                        if (entryTableEnd > fileLen)
+                            throw new InvalidDataException("文件表损坏，读取失败！");
+
+                        // 首文件偏移应位于条目表之后且在文件以内
+                        if (firstFileOffset < entryTableEnd || firstFileOffset > fileLen)
+                            throw new InvalidDataException("文件表损坏，读取失败！");
+
+                        // 读取文件条目（逐条校验偏移是否越界）
+                        var fileInfos = new List<FpacFileInfo>();
+                        for (int i = 0; i < fileCount; i++)
                         {
-                            nameBytes.Add(b);
+                            var fileInfo = new FpacFileInfo
+                            {
+                                FilenameCrc32 = reader.ReadUInt32(),
+                                Unknown = reader.ReadUInt32(),
+                                FilenameOffset = reader.ReadUInt64(),
+                                FileSize = reader.ReadUInt64(),
+                                FileOffset = reader.ReadUInt64()
+                            };
+
+                            // 偏移越界检查（文件名偏移、文件数据偏移、文件大小必须落在文件内）
+                            if (fileInfo.FilenameOffset >= (ulong)fileLen)
+                                throw new InvalidDataException("文件表损坏，读取失败！");
+                            if (fileInfo.FileOffset > (ulong)fileLen)
+                                throw new InvalidDataException("文件表损坏，读取失败！");
+                            if (fileInfo.FileSize > (ulong)fileLen)
+                                throw new InvalidDataException("文件表损坏，读取失败！");
+
+                            fileInfos.Add(fileInfo);
                         }
-                        string filename = Encoding.UTF8.GetString(nameBytes.ToArray());
 
-                        // 计算未异或的CRC32值
-                        uint originalCrc32 = fileInfo.FilenameCrc32 ^ 0xFFFFFFFF;
-                        byte[] crc32Bytes = BitConverter.GetBytes(originalCrc32);
+                        // 读取文件名并构建结果
+                        foreach (var fileInfo in fileInfos)
+                        {
+                            // 定位到文件名位置
+                            reader.BaseStream.Seek((long)fileInfo.FilenameOffset, SeekOrigin.Begin);
 
-                        result.Add(new Tuple<byte[], string, long, long>(
-                            crc32Bytes,
-                            filename,
-                            (long)fileInfo.FileOffset,
-                            (long)fileInfo.FileSize
-                        ));
+                            // 读取 NULL 结尾的文件名；若到文件末尾仍未遇到 NULL，说明文件表损坏
+                            var nameBytes = new List<byte>();
+                            bool terminated = false;
+                            while (reader.BaseStream.Position < fileLen)
+                            {
+                                byte b = reader.ReadByte();
+                                if (b == 0) { terminated = true; break; }
+                                nameBytes.Add(b);
+                            }
+                            if (!terminated)
+                                throw new InvalidDataException("文件表损坏，读取失败！");
+
+                            string filename = Encoding.UTF8.GetString(nameBytes.ToArray());
+
+                            // 计算未异或的CRC32值
+                            uint originalCrc32 = fileInfo.FilenameCrc32 ^ 0xFFFFFFFF;
+                            byte[] crc32Bytes = BitConverter.GetBytes(originalCrc32);
+
+                            result.Add(new Tuple<byte[], string, long, long>(
+                                crc32Bytes,
+                                filename,
+                                (long)fileInfo.FileOffset,
+                                (long)fileInfo.FileSize
+                            ));
+                        }
                     }
+                }
+                catch (InvalidDataException)
+                {
+                    // 已是我们主动抛出的语义化异常，原样向外传播（主窗体负责展示）
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    // 其它未预期的读取错误（磁盘/权限/流意外结束等），既不是格式不对也不是表损坏，
+                    // 不能误导性归为“文件表损坏”，如实告知为“其他未预料到的错误”并附带原异常消息。
+                    throw new InvalidDataException($"发生其他未预料到的错误：{ex.Message} 读取失败！", ex);
                 }
                 return result;
             }
@@ -606,7 +937,7 @@ namespace FPACTool
             /// <param name="fileList">文本型 已处理好的文件列表, </param>
             /// <param name="savePath">文本型 欲保存的路径)</param>
             /// </summary>
-            public static void UnpackAllFile(string PACfilePath, List<Tuple<byte[], string, long, long, long>> fileList, string savePath)
+            public static void UnpackAllFile(string PACfilePath, List<Tuple<byte[], string, long, long>> fileList, string savePath)
             {
                 // 检查文件是否存在
                 if (!File.Exists(PACfilePath))
@@ -673,25 +1004,39 @@ namespace FPACTool
                             long fileOffset = fileInfo.Item3;
                             long fileSize = fileInfo.Item4;
 
-                            // 构建输出文件路径
-                            string outputPath = Path.Combine(savePath, filename.Replace('/', Path.DirectorySeparatorChar));
-                            string outputDir = Path.GetDirectoryName(outputPath);
+                            string outputPath = null;
+                            try
+                            {
+                                // 构建输出文件路径
+                                outputPath = Path.Combine(savePath, filename.Replace('/', Path.DirectorySeparatorChar));
+                                string outputDir = Path.GetDirectoryName(outputPath);
 
-                            if (!Directory.Exists(outputDir))
-                                Directory.CreateDirectory(outputDir);
+                                if (!Directory.Exists(outputDir))
+                                    Directory.CreateDirectory(outputDir);
 
-                            // 读取文件数据
-                            reader.BaseStream.Seek(fileOffset, SeekOrigin.Begin);
-                            byte[] fileData = reader.ReadBytes((int)fileSize);
+                                // 读取文件数据
+                                reader.BaseStream.Seek(fileOffset, SeekOrigin.Begin);
+                                byte[] fileData = reader.ReadBytes((int)fileSize);
 
-                            // 写入文件
-                            File.WriteAllBytes(outputPath, fileData);
+                                // 写入文件
+                                File.WriteAllBytes(outputPath, fileData);
+                            }
+                            catch (Exception ex)
+                            {
+                                // 单文件提取失败：记录错误并继续后续文件，不中断整体任务
+                                progressCallback?.Invoke(new FileProgress
+                                {
+                                    percentage = (i + 1) * 100 / targetFile.Count,
+                                    state = $"提取失败: {filename}",
+                                    error = $"文件「{filename}」提取失败：{ex.Message}"
+                                });
+                                continue;
+                            }
 
                             int progress = (i + 1) * 100 / targetFile.Count;
                             progressCallback?.Invoke(new FileProgress
                             {
                                 percentage = progress,
-                                // state = $"解压文件: {i + 1}/{targetFile.Count} - {filename}"
                                 state = $"正在提取: {filename}"
                             });
                         }
