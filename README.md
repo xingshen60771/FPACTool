@@ -1,13 +1,13 @@
 # FPAC Tool
 
-仅限个人学习研究使用，游戏资源文件之版权归相关公司所有！
+仅限个人学习研究使用，游戏资源文件之版权归相关公司所有！侵删！    
 
 ## 主要功能  
 提取和重建部分游戏的PAC格式的包文件。
 截至当前版本，本工具已适配以下游戏的 PAC 文件打包、提取：    
-- 空之轨迹 1st（The Legend of Heroes: Trails in the Sky 1st）     
-- 空之轨迹 2nd（The Legend of Heroes: Trails in the Sky 2nd）     
-- 亰都幻都 樱花幻舞（KYOTO XANADU -the Blooming Phantom-）     
+- The Legend of Heroes: Trails in the Sky 1st     
+- The Legend of Heroes: Trails in the Sky 2nd     
+- KYOTO XANADU -the Blooming Phantom-     
 
 未来同厂商的游戏的 PAC 文件理论上适配，请自行尝试。
 
